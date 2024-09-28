@@ -1,4 +1,51 @@
+import matplotlib.pyplot as plt 
+import csv
+import numpy as np
 import pandas as pd
-mydata= pd.read_csv("temperatur_trykk_met_samme_rune_time_datasett.csv.txt")
 
-print(mydata)
+navn = []
+stasjon = []
+dato1 = []
+temp1 = []
+trykk1 = []
+with open('temperatur_trykk_met_samme_rune_time_datasett.csv.txt', 'r') as f:
+    reader = csv.reader(f, delimiter=';')
+    next(reader) #Hopper over første linje
+    for row in reader:
+        navn.append(row[0])
+        stasjon.append(row[1])
+        dato1.append(row[2])
+        temp1.append(row[3])
+        trykk1.append(row[4])
+        
+dato2 = []
+tid_siden_start = []
+trykk2 = []
+abs_trykk2 = []
+temp2 = []
+with open('trykk_og_temperaturlogg_rune_time.csv.txt', 'r') as f:
+    reader = csv.reader(f, delimiter=';')
+    next(reader) #Hopper over første linje
+    for row in reader:
+        dato2.append(row[0])
+        tid_siden_start.append(row[1])
+        trykk2.append(row[2])
+        abs_trykk2.append(row[3])
+        temp2.append(row[4])
+        
+temp1_ = [s.replace(',', '.') for s in temp1] #Bytter ut , med . i temp1
+temp1_float = [float(num) for num in temp1_ if num] #Endrer temp1 fra str til float
+dato1_ = [s for s in dato1 if s] #Fjerner tom string
+
+trykk1_ = [s.replace(',', '.') for s in trykk1] #Bytter ut , med . i trykk1
+trykk1_float = [float(num) for num in trykk1_ if num] #Endrer trykk1 fra str til float
+
+figure, axis = plt.subplots(2)
+
+axis[0].plot(dato1_, trykk1_float, color = 'g', label = "bar") 
+axis[1].plot(dato1_, temp1_float, color = 'r', label = "temp") 
+plt.xlabel('dato') 
+plt.ylabel('bar') 
+plt.title('bar') 
+plt.legend() 
+plt.show() 
