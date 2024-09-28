@@ -1,4 +1,4 @@
-import math
-import turtle
+import pandas as pd
+mydata= pd.read_csv("temperatur_trykk_met_samme_rune_time_datasett.csv.txt")
 
-
+print(mydata)
