@@ -57,10 +57,10 @@ for date in dato2:
         date = date.replace('00', '12', 1) 
      
     if "/" in date:
-        formatert_dato1 = datetime.strptime(date, '%m/%d/%Y %I:%M:%S %p').strftime('%d.%m.%Y %H:%M')
+        formatert_dato1 = datetime.strptime(date, '%m/%d/%Y %I:%M:%S %p').strftime('%Y-%m-%d %H:%M')
         Dato_2Form.append(formatert_dato1)
     else:
-        formatert_dato1 = datetime.strptime(date, '%m.%d.%Y %H:%M').strftime('%d.%m.%Y %H:%M')
+        formatert_dato1 = datetime.strptime(date, '%m.%d.%Y %H:%M').strftime('%Y-%m-%d %H:%M')
         Dato_2Form.append(formatert_dato1)
        
  
@@ -70,6 +70,9 @@ for i in abs_trykk2_float:
     abs_trykk2_float10.append(i*10)
     
 figure, axis = plt.subplots(2)
+
+#dato1_ = datetime(dato1_)
+#Dato_2Form = datetime(Dato_2Form)
 
 df_dato1_ = pd.DataFrame(trykk1_float, index=dato1_,  columns=["Data1"] )
 df_Dato_2Form = pd.DataFrame(abs_trykk2_float10, index=Dato_2Form, columns=["Data2"])
